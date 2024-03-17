@@ -9,6 +9,32 @@ import Button from "../components/button";
 const Signup = ({navigation}) => {
     const [isPasswordShown, setIsPasswordShown] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    // const [email, setEmail] = useState('');
+    // const [pword, setPword] = useState('');
+    // const [mobNum, setMobNum] = useState('');
+    
+    // const handleEmailChange = (text) => {setEmail(text);};
+    // const handlePwordChange = (text) => {setEmail(text);};
+    // const handleMobNumChange = (text) => {setEmail(text);};
+
+    const [user, setUser] = useState({
+        email : "",
+        phone : "",
+        password : ""
+    })
+
+    handleUserChange = (key,value) => {
+        setUser(prevState => ({
+            ...prevState,
+            [key]:value
+        }));
+    };
+
+    handleSubmit = () => {
+        console.log(user.email);
+        console.log(user.phone);
+        console.log(user.password);
+    };
 
     return (
         <SafeAreaView style={{
@@ -49,6 +75,7 @@ const Signup = ({navigation}) => {
                         placeholderTextColor={COLORS.gre}
                         keyboardType="email-address"
                         style={{ width: "100%" }}
+                        onChangeText={(text)=>handleUserChange('email',text)}
                     />
                     <Text style={{
                         fontSize: 16,
@@ -93,9 +120,8 @@ const Signup = ({navigation}) => {
                         placeholder="Enter your mobile number"
                         placeholderTextColor={COLORS.gre}
                         keyboardType="numeric"
-                        style={{
-                            width: "85%"
-                        }}
+                        style={{width: "85%"}}
+                        onChangeText={(text)=>handleUserChange('phone',text)}
                     />
                     <Text style={{
                         fontSize: 16,
@@ -124,6 +150,7 @@ const Signup = ({navigation}) => {
                         placeholderTextColor={COLORS.gre}
                         secureTextEntry={isPasswordShown}
                         style={{ width: "100%" }}
+                        onChangeText={(text)=>handleUserChange('password',text)}
                     />
                     <Text style={{
                         fontSize: 16,
@@ -173,7 +200,8 @@ const Signup = ({navigation}) => {
                         marginTop: 18,
                         width:"100%"
                     }}
-                    onPress={()=>navigation.navigate("Home")}
+                    onPress = {handleSubmit}
+                    // onPress={()=>navigation.navigate("Home")}
                 />
 
                 <View style={{
