@@ -13,6 +13,11 @@ const Signup = ({navigation}) => {
     const [isPasswordShown, setIsPasswordShown] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
+
+    const [showfeatureyettocome,setshowfeatureyettocome] = useState(false);
+    const imageClicked = () => {setshowfeatureyettocome(true);};
+  
+
     const [user, setUser] = useState({
         email: "",
         phone: "",
@@ -152,7 +157,7 @@ const Signup = ({navigation}) => {
                     <TextInput
                         placeholder="Enter your password"
                         placeholderTextColor={COLORS.gre}
-                        secureTextEntry={isPasswordShown}
+                        secureTextEntry={!isPasswordShown}
                         style={{ width: "100%" }}
                         onChangeText={(text)=>handleUserChange('password',text)}
                     />
@@ -167,12 +172,17 @@ const Signup = ({navigation}) => {
 
                     <TouchableOpacity style={{
                         position: "absolute",
-                        right: "7%"
+                        right: "5%",
+                        // borderWidth:1,
+                        height:"75%",
+                        width:30,
+                        alignItems:"center",
+                        justifyContent:"center"
                     }}
                         onPress={() => setIsPasswordShown(!isPasswordShown)}
                     >
                         {
-                            isPasswordShown == true ? (
+                            isPasswordShown == false ? (
                                 <Ionicons name="eye-off" size={20} color={COLORS.blak} />
                             ) : (
                                 <Ionicons name="eye" size={20} color={COLORS.blak} />
@@ -193,7 +203,9 @@ const Signup = ({navigation}) => {
                         onValueChange={setIsChecked}
                         color={isChecked ? "#222222" : undefined}
                     />
+                    <TouchableOpacity onPress={()=>{setIsChecked(!isChecked)}}>
                     <Text>I agree to the terms and conditions</Text>
+                    </TouchableOpacity>
                     {/* </Checkbox> */}
                 </View>
 
@@ -204,8 +216,8 @@ const Signup = ({navigation}) => {
                         marginTop: 18,
                         width:"100%"
                     }}
-                    onPress = {handleSubmit}
-                    // onPress={()=>navigation.navigate("Home")}
+                    // onPress = {handleSubmit}
+                    onPress={()=>navigation.navigate("Home")}
                 />
 
                 <View style={{
@@ -233,7 +245,8 @@ const Signup = ({navigation}) => {
                     justifyContent:"center"
                 }}>
                     <TouchableOpacity
-                        onPress={()=>console.log("Pressed")}
+                        // onPress={()=>console.log("Pressed")}
+                        onPress={imageClicked}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -260,7 +273,8 @@ const Signup = ({navigation}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={()=>console.log("Pressed")}
+                        // onPress={()=>console.log("Pressed")}
+                        onPress={imageClicked}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -285,7 +299,8 @@ const Signup = ({navigation}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={()=>console.log("Pressed")}
+                        // onPress={()=>console.log("Pressed")}
+                        onPress={imageClicked}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -308,6 +323,12 @@ const Signup = ({navigation}) => {
                         />
                         {/* <Text>Instagram</Text> */}
                     </TouchableOpacity>
+                </View>
+
+                <View style={{alignItems:"center"}}>
+                    {showfeatureyettocome && (
+                    <Text style={{color:"red"}}>Feature yet to come</Text>
+                    )}
                 </View>
 
                 <View style={{
