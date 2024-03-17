@@ -6,32 +6,45 @@ import { Ionicons } from "@expo/vector-icons";
 import { Checkbox } from "expo-checkbox";
 import Button from "../components/button";
 
+import axios from "axios";
+
+
 const Signup = ({navigation}) => {
     const [isPasswordShown, setIsPasswordShown] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
+
     const [showfeatureyettocome,setshowfeatureyettocome] = useState(false);
     const imageClicked = () => {setshowfeatureyettocome(true);};
+  
 
     const [user, setUser] = useState({
-        email : "",
-        phone : "",
-        password : ""
-    })
+        email: "",
+        phone: "",
+        password: ""
+    });
 
-    handleUserChange = (key,value) => {
+    const handleUserChange = (key, value) => {
         setUser(prevState => ({
             ...prevState,
-            [key]:value
+            [key]: value
         }));
     };
 
-    handleSubmit = () => {
-        console.log(user.email);
-        console.log(user.phone);
-        console.log(user.password);
-    };
+    const handleSubmit = () => {
 
+        axios.post("http://192.168.238.46:6969/api/user/addUser", user)
+            .then(response => {
+                console.log(response.data);
+                navigation.navigate("Home");
+            })
+            .catch(error => {
+                console.error("Signup failed:", error);
+                // Handle error, e.g., show error message to user
+            });
+
+        console.log(user);
+    };
     return (
         <SafeAreaView style={{
             flex: 1,
