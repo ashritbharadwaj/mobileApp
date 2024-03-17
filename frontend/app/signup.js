@@ -5,7 +5,7 @@ import COLORS from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Checkbox } from "expo-checkbox";
 import Button from "../components/button";
-
+import api from "../api/axiosConfig";
 import axios from "axios";
 
 
@@ -28,7 +28,7 @@ const Signup = ({navigation}) => {
 
     const handleSubmit = () => {
 
-        axios.post("http://192.168.238.46:6969/api/user/addUser", user)
+        api.post("/user/addUser", user)
             .then(response => {
                 console.log(response.data);
                 navigation.navigate("Home");
