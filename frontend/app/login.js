@@ -10,26 +10,6 @@ const Login = ({navigation}) => {
     const [isPasswordShown, setIsPasswordShown] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
-    const [showfeatureyettocome,setshowfeatureyettocome] = useState(false);
-    const imageClicked = () => {setshowfeatureyettocome(true);};
-
-    const [user, setUser] = useState({
-        email : "",
-        password : ""
-    })
-
-    handleUserChange = (key,value) => {
-        setUser(prevState => ({
-            ...prevState,
-            [key]:value
-        }));
-    };
-
-    handleSubmit = () => {
-        console.log(user.email);
-        console.log(user.password);
-    };
-
     return (
         <SafeAreaView style={{
             flex: 1,
@@ -69,7 +49,6 @@ const Login = ({navigation}) => {
                         placeholderTextColor={COLORS.gre}
                         keyboardType="email-address"
                         style={{ width: "100%" }}
-                        onChangeText={(text)=>handleUserChange('email',text)}
                     />
                     <Text style={{
                         fontSize: 16,
@@ -96,9 +75,8 @@ const Login = ({navigation}) => {
                     <TextInput
                         placeholder="Enter your password"
                         placeholderTextColor={COLORS.gre}
-                        secureTextEntry={!isPasswordShown}
+                        secureTextEntry={isPasswordShown}
                         style={{ width: "100%" }}
-                        onChangeText={(text)=>handleUserChange('password',text)}
                     />
                     <Text style={{
                         fontSize: 16,
@@ -111,17 +89,12 @@ const Login = ({navigation}) => {
 
                     <TouchableOpacity style={{
                         position: "absolute",
-                        right: "5%",
-                        // borderWidth:1,
-                        height:"75%",
-                        width:30,
-                        alignItems:"center",
-                        justifyContent:"center"
+                        right: "7%"
                     }}
                         onPress={() => setIsPasswordShown(!isPasswordShown)}
                     >
                         {
-                            isPasswordShown == false ? (
+                            isPasswordShown == true ? (
                                 <Ionicons name="eye-off" size={20} color={COLORS.blak} />
                             ) : (
                                 <Ionicons name="eye" size={20} color={COLORS.blak} />
@@ -134,7 +107,7 @@ const Login = ({navigation}) => {
                 <View style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    paddingLeft: "5%"
+                    paddingLeft: "2%"
                 }}>
                     <Checkbox
                         style={{ marginRight: 8 }}
@@ -142,9 +115,7 @@ const Login = ({navigation}) => {
                         onValueChange={setIsChecked}
                         color={isChecked ? "#222222" : undefined}
                     />
-                    <TouchableOpacity onPress={()=>{setIsChecked(!isChecked)}}>
-                    <Text>Remember me</Text>
-                    </TouchableOpacity>
+                    <Text>Remember Me</Text>
                 </View>
 
                 <Button
@@ -154,7 +125,6 @@ const Login = ({navigation}) => {
                         marginTop: 18,
                         width:"100%"
                     }}
-                    // onPress={handleSubmit}
                     onPress={()=>navigation.navigate("Home")}
                 />
 
@@ -179,12 +149,11 @@ const Login = ({navigation}) => {
                 </View>
 
                 <View style={{
-                    // borderWidth:1,
                     flexDirection:"row",
                     justifyContent:"center"
                 }}>
                     <TouchableOpacity
-                        onPress={imageClicked}
+                        onPress={()=>console.log("Pressed")}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -211,7 +180,7 @@ const Login = ({navigation}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={imageClicked}
+                        onPress={()=>console.log("Pressed")}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -236,7 +205,7 @@ const Login = ({navigation}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={imageClicked}
+                        onPress={()=>console.log("Pressed")}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -259,12 +228,6 @@ const Login = ({navigation}) => {
                         />
                         {/* <Text>Instagram</Text> */}
                     </TouchableOpacity>
-                </View>
-
-                <View style={{alignItems:"center"}}>
-                    {showfeatureyettocome && (
-                    <Text style={{color:"red"}}>Feature yet to come</Text>
-                    )}
                 </View>
 
                 <View style={{

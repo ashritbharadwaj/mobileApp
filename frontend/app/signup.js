@@ -5,18 +5,13 @@ import COLORS from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Checkbox } from "expo-checkbox";
 import Button from "../components/button";
-
+import api from "../api/axiosConfig";
 import axios from "axios";
 
 
 const Signup = ({navigation}) => {
     const [isPasswordShown, setIsPasswordShown] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
-
-
-    const [showfeatureyettocome,setshowfeatureyettocome] = useState(false);
-    const imageClicked = () => {setshowfeatureyettocome(true);};
-  
 
     const [user, setUser] = useState({
         email: "",
@@ -33,7 +28,7 @@ const Signup = ({navigation}) => {
 
     const handleSubmit = () => {
 
-        axios.post("http://192.168.238.46:6969/api/user/addUser", user)
+        api.post("/user/sign", user)
             .then(response => {
                 console.log(response.data);
                 navigation.navigate("Home");
@@ -157,7 +152,7 @@ const Signup = ({navigation}) => {
                     <TextInput
                         placeholder="Enter your password"
                         placeholderTextColor={COLORS.gre}
-                        secureTextEntry={!isPasswordShown}
+                        secureTextEntry={isPasswordShown}
                         style={{ width: "100%" }}
                         onChangeText={(text)=>handleUserChange('password',text)}
                     />
@@ -172,17 +167,12 @@ const Signup = ({navigation}) => {
 
                     <TouchableOpacity style={{
                         position: "absolute",
-                        right: "5%",
-                        // borderWidth:1,
-                        height:"75%",
-                        width:30,
-                        alignItems:"center",
-                        justifyContent:"center"
+                        right: "7%"
                     }}
                         onPress={() => setIsPasswordShown(!isPasswordShown)}
                     >
                         {
-                            isPasswordShown == false ? (
+                            isPasswordShown == true ? (
                                 <Ionicons name="eye-off" size={20} color={COLORS.blak} />
                             ) : (
                                 <Ionicons name="eye" size={20} color={COLORS.blak} />
@@ -203,9 +193,7 @@ const Signup = ({navigation}) => {
                         onValueChange={setIsChecked}
                         color={isChecked ? "#222222" : undefined}
                     />
-                    <TouchableOpacity onPress={()=>{setIsChecked(!isChecked)}}>
                     <Text>I agree to the terms and conditions</Text>
-                    </TouchableOpacity>
                     {/* </Checkbox> */}
                 </View>
 
@@ -216,8 +204,8 @@ const Signup = ({navigation}) => {
                         marginTop: 18,
                         width:"100%"
                     }}
-                    // onPress = {handleSubmit}
-                    onPress={()=>navigation.navigate("Home")}
+                    onPress = {handleSubmit}
+                    // onPress={()=>navigation.navigate("Home")}
                 />
 
                 <View style={{
@@ -245,8 +233,7 @@ const Signup = ({navigation}) => {
                     justifyContent:"center"
                 }}>
                     <TouchableOpacity
-                        // onPress={()=>console.log("Pressed")}
-                        onPress={imageClicked}
+                        onPress={()=>console.log("Pressed")}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -273,8 +260,7 @@ const Signup = ({navigation}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        // onPress={()=>console.log("Pressed")}
-                        onPress={imageClicked}
+                        onPress={()=>console.log("Pressed")}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -299,8 +285,7 @@ const Signup = ({navigation}) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        // onPress={()=>console.log("Pressed")}
-                        onPress={imageClicked}
+                        onPress={()=>console.log("Pressed")}
                         style={{
                             flex:1,
                             alignItems:"center",
@@ -323,12 +308,6 @@ const Signup = ({navigation}) => {
                         />
                         {/* <Text>Instagram</Text> */}
                     </TouchableOpacity>
-                </View>
-
-                <View style={{alignItems:"center"}}>
-                    {showfeatureyettocome && (
-                    <Text style={{color:"red"}}>Feature yet to come</Text>
-                    )}
                 </View>
 
                 <View style={{

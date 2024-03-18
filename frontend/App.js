@@ -40,7 +40,7 @@ export default function App(){
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='Login'
+        initialRouteName='Signup'
       >
         <Stack.Screen
           name='Welcome'
